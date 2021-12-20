@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.6.10"
+    kotlin("multiplatform") version "1.6.20-dev-7177"
     application
 }
 
@@ -9,6 +9,7 @@ version = "1.0-SNAPSHOT"
 repositories {
     jcenter()
     mavenCentral()
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev/")
     maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
 }
 
@@ -22,7 +23,12 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js(LEGACY) {
+    js(IR) {
+        compilations["main"].packageJson {
+            name = "example"
+            version = "1.0.0"
+        }
+
         binaries.executable()
         browser {
             commonWebpackConfig {
@@ -31,6 +37,11 @@ kotlin {
         }
     }
     sourceSets {
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
+            languageSettings.optIn("kotlin.js.ExperimentalJsExport")
+        }
+
         val commonMain by getting
         val commonTest by getting {
             dependencies {
