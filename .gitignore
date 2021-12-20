@@ -1,0 +1,12 @@
+.gradle
+.idea
+/out
+/build
+*.iml
+*.ipr
+*.iws
+.env
+kotlin-js-store
+**/build/
+!src/**/build/
+!gradle-wrapper.jar
