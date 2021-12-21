@@ -1,5 +1,6 @@
 plugins {
-    kotlin("multiplatform") version "1.6.20-dev-7177"
+    kotlin("multiplatform") version "1.6.20-dev-7236"
+    kotlin("plugin.serialization") version "1.6.20-dev-7236"
     application
 }
 
@@ -42,7 +43,11 @@ kotlin {
             languageSettings.optIn("kotlin.js.ExperimentalJsExport")
         }
 
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))

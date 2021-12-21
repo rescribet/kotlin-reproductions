@@ -1,3 +1,4 @@
+import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @JsExport
@@ -6,3 +7,6 @@ enum class MyEnum {
     B,
     C
 }
+
+@Serializable
+data class Test(val name: String)
