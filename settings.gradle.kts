@@ -1,5 +1,5 @@
 
-rootProject.name = "ir-enumclasses"
+rootProject.name = "kotlin-reproductions"
 
 pluginManagement {
     repositories {

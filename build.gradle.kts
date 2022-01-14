@@ -1,13 +1,12 @@
 plugins {
-    kotlin("multiplatform") version "1.6.20-dev-7177"
+    kotlin("multiplatform") version "1.6.20-RC-4"
     application
 }
 
-group = "com.rescribet.kotlin.enumclasses"
+group = "com.rescribet.kotlin.reproductions"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    jcenter()
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev/")
     maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
@@ -67,7 +66,7 @@ kotlin {
 }
 
 application {
-    mainClass.set("com.rescribet.kotlin.enumclasses.application.ServerKt")
+    mainClass.set("com.rescribet.kotlin.reproductions.application.ServerKt")
 }
 
 tasks.named<Copy>("jvmProcessResources") {
