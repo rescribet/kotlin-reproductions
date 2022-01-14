@@ -1,8 +1,37 @@
 # Kotlin Reproductions
 
-See the [dev gradle plugin repo](https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev/org/jetbrains/kotlin/multiplatform/org.jetbrains.kotlin.multiplatform.gradle.plugin/)
-to see the latest 1.6.20 (pre)release, `1.6.20-RC-4` at the time of writing.
+When using a generic non-top level class with a class which resolves to `any`
+the Kotlin compiler will output nested block comments, which cause the TS 
+compiler to print `TS1005: ',' expected.` errors.
 
-Output JS file is in `build/js/packages/kotlin-reproductions/kotlin/kotlin-reproductions.js`, 
-and the surrounding package `build/js/packages/kotlin-reproductions` can be 
-published or linked locally for usage.
+The TypeScript team has indicated they [won't support nested block comment 
+parsing](https://github.com/microsoft/TypeScript/issues/40865#issuecomment-702200915)
+
+## Expected
+Something to ensure the closing block comment doesn't close a previous one.
+
+```typescript
+export class Foo {
+    constructor(baz: any/* kotlin.collections.List<any/* Bar *\/> */);
+    get baz(): any/* kotlin.collections.List<any/* Bar *\/> */;
+    component1(): any/* kotlin.collections.List<any/* Bar *\/> */;
+    copy(baz: any/* kotlin.collections.List<any/* Bar *\/> */): Foo;
+    toString(): string;
+    hashCode(): number;
+    equals(other: Nullable<any>): boolean;
+}
+```
+
+## Actual
+
+```typescript
+export class Foo {
+    constructor(baz: any/* kotlin.collections.List<any/* Bar */> */);
+    get baz(): any/* kotlin.collections.List<any/* Bar */> */;
+    component1(): any/* kotlin.collections.List<any/* Bar */> */;
+    copy(baz: any/* kotlin.collections.List<any/* Bar */> */): Foo;
+    toString(): string;
+    hashCode(): number;
+    equals(other: Nullable<any>): boolean;
+}
+```
