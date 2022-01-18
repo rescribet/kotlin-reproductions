@@ -22,13 +22,8 @@ class ThrowingPlugin(private val configuration: Configuration) {
     class Configuration
 
     private fun intercept(context: PipelineContext<*, ApplicationCall>) {
-        try {
-            // We make a request here which can fail
-            throw NotFoundException()
-        } catch (e: ResponseException) {
-            println("Unexpected status $status while getting tenant ($e)")
-            throw e
-        }
+        // We make a request here which can fail
+        throw NotFoundException()
     }
 
     companion object Plugin : ApplicationPlugin<Pipeline<*, ApplicationCall>, Configuration, ThrowingPlugin> {
