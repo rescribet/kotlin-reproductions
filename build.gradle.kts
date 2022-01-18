@@ -1,3 +1,5 @@
+val ktor_version: String by project
+
 plugins {
     kotlin("multiplatform") version "1.6.20-RC-4"
     application
@@ -41,7 +43,12 @@ kotlin {
             languageSettings.optIn("kotlin.js.ExperimentalJsExport")
         }
 
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-http:$ktor_version")
+                implementation("io.ktor:ktor-utils:$ktor_version")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -49,18 +56,19 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-netty:1.6.3")
-                implementation("io.ktor:ktor-html-builder:1.6.3")
-                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+                implementation("io.ktor:ktor-server-core:$ktor_version")
+                implementation("io.ktor:ktor-server-host-common:$ktor_version")
+                implementation("io.ktor:ktor-server-auth-jwt:$ktor_version")
+                implementation("io.ktor:ktor-server-cio:$ktor_version")
+                implementation("io.ktor:ktor-server-status-pages:$ktor_version")
             }
         }
-        val jvmTest by getting
-        val jsMain by getting {
+        val jvmTest by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.240-kotlin-1.5.30")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:17.0.2-pre.240-kotlin-1.5.30")
+                implementation("io.ktor:ktor-server-tests:$ktor_version")
             }
         }
+        val jsMain by getting
         val jsTest by getting
     }
 }
