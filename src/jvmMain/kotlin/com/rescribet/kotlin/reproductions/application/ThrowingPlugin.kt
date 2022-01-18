@@ -11,6 +11,13 @@ import io.ktor.util.pipeline.PipelineContext
 
 class NotFoundException : Exception()
 
+// Both APIs display the same behaviour
+//val ThrowingPlugin = createApplicationPlugin("ThrowingPlugin") {
+//    onCall {
+//        throw NotFoundException()
+//    }
+//}
+
 class ThrowingPlugin(private val configuration: Configuration) {
     class Configuration
 
