@@ -1,5 +1,9 @@
+val kotlin_version: String by project
+val kotlinx_html_version: String by project
+val ktor_version: String by project
+
 plugins {
-    kotlin("multiplatform") version "1.6.20-RC-4"
+    kotlin("multiplatform") version "1.6.21"
     application
 }
 
@@ -8,7 +12,7 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev/")
+//    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev/")
     maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
 }
 
@@ -49,24 +53,25 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-netty:1.6.3")
-                implementation("io.ktor:ktor-html-builder:1.6.3")
-                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+                implementation("io.ktor:ktor-server-netty:$ktor_version")
+                implementation("io.ktor:ktor-html-builder:$ktor_version")
+                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinx_html_version")
             }
         }
         val jvmTest by getting
-        val jsMain by getting {
-            dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.240-kotlin-1.5.30")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:17.0.2-pre.240-kotlin-1.5.30")
-            }
-        }
+        val jsMain by getting
         val jsTest by getting
     }
 }
 
 application {
     mainClass.set("com.rescribet.kotlin.reproductions.application.ServerKt")
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 tasks.named<Copy>("jvmProcessResources") {
