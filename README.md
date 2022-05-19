@@ -1,8 +1,5 @@
 # Kotlin Reproductions
 
-See the [dev gradle plugin repo](https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev/org/jetbrains/kotlin/multiplatform/org.jetbrains.kotlin.multiplatform.gradle.plugin/)
-to see the latest 1.6.20 (pre)release, `1.6.20-RC-4` at the time of writing.
-
-Output JS file is in `build/js/packages/kotlin-reproductions/kotlin/kotlin-reproductions.js`, 
-and the surrounding package `build/js/packages/kotlin-reproductions` can be 
-published or linked locally for usage.
+This is a repository where I reproduce issues without having to set up a new 
+project each time. Check out the [branches](https://github.com/rescribet/kotlin-reproductions/branches)
+for different issue reproductions.
