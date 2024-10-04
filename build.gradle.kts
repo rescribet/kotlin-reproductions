@@ -4,8 +4,8 @@ val ktor_version: String by project
 val serialization_version: String by project
 
 plugins {
-    kotlin("multiplatform") version "1.7.0"
-    kotlin("plugin.serialization") version "1.7.0"
+    kotlin("multiplatform") version "2.0.20"
+    kotlin("plugin.serialization") version "2.0.20"
     application
 }
 
