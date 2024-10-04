@@ -1,11 +1,6 @@
-val kotlin_version: String by project
-val kotlinx_html_version: String by project
-val ktor_version: String by project
-val serialization_version: String by project
-
 plugins {
-    kotlin("multiplatform") version "2.0.20"
-    kotlin("plugin.serialization") version "2.0.20"
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlinx.serialization)
     application
 }
 
@@ -20,9 +15,6 @@ repositories {
 
 kotlin {
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
         withJava()
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
@@ -37,19 +29,19 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
+                implementation(libs.kotlinx.serialization.json)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.kotlin.test)
             }
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-cio:$ktor_version")
-                implementation("io.ktor:ktor-server-html-builder:$ktor_version")
-                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinx_html_version")
+                implementation(libs.bundles.logging)
+                implementation(libs.bundles.ktor)
+                implementation(libs.kotlinx.html)
             }
         }
         val jvmTest by getting

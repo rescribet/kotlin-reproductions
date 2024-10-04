@@ -1,0 +1,39 @@
+[versions]
+# https://github.com/JetBrains/kotlin/releases
+kotlin = "2.0.20"
+# https://github.com/Kotlin/kotlinx.html/releases
+kotlinx-html = "0.11.0"
+# https://github.com/Kotlin/kotlinx.serialization/releases
+kotlinx-serialization = "1.7.3"
+# https://ktor.io/changelog/
+ktor = "2.3.12"
+slf4j = "2.0.16"
+
+[libraries]
+
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+kotlinx-html = { module = "org.jetbrains.kotlinx:kotlinx-html", version.ref = "kotlinx-html" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
+ktor-server-html-builder = { module = "io.ktor:ktor-server-html-builder", version.ref = "ktor" }
+
+logging-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+logging-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
+
+[bundles]
+
+ktor = [
+    "ktor-server-cio",
+    "ktor-server-html-builder",
+]
+
+logging = [
+    "logging-api",
+    "logging-simple",
+]
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin"}
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
